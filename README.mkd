@@ -1,0 +1,49 @@
+# siofile - read files over socket.io
+
+## server
+
+```javascript
+  var siofile = require('siofile')
+
+  io.sockets.on('connection', function (socket) {
+    socket.on('siofile', siofile(socket))
+  })
+```
+
+This is **incredibly** insecure because it allows all clients access to your entire filesystem.
+
+Instead.
+
+```javascript
+  socket.on('siofile', siofile(socket, '/home/me/myfile'))
+```
+
+Or you can give a list of files you want to make available.
+
+```javascript
+  socket.on('siofile', siofile(socket, ['/home/me/myfile1', '/home/me/myfile2']))
+```
+
+## browser
+
+```html
+  <script src="/socket.io/socket.io.js"></script>
+  <script>
+    var socket = io.connect('http://localhost')
+    
+    socket.on('connect', function () {
+      siofile(socket).read('/home/me/myfile', function (err, data) {
+        console.log(err, data)
+      })
+    })
+    
+  </script>
+```
+
+Alternatively, you can also *watch* a file, which will first read the contents and then call your callback again every time new data is appended to the file. This is ideal for watching log files.
+
+```javascript
+  siofile(socket).watch('/home/me/myfile', function (err, data) {
+    console.log(err, data)
+  })
+```

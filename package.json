@@ -1,0 +1,13 @@
+{
+  "author": "Mikeal Rogers <mikeal.rogers@gmail.com> (http://www.mikealrogers.com)",
+  "name": "siofile",
+  "description": "Stream a file to a socket.io client.",
+  "version": "0.0.0",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/mikeal/siofile.git"
+  },
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {}
+}

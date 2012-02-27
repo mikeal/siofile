@@ -1,0 +1,19 @@
+<html>
+<head>
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="/siofile.js"></script>
+  <script>  
+    var socket = io.connect('http://localhost:8000')
+    
+    socket.on('connect', function () {
+      siofile(socket).watch('index.js', function (err, data) {
+        console.log(err, data)
+      })
+    })
+    
+  </script>
+</head>
+<body>
+  
+</body>
+<html>
